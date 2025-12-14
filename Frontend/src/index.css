@@ -1,0 +1,237 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.5rem;
+  /* Light theme - Elegant beige and cream palette */
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #e5e5e5;
+  --secondary-foreground: #000000;
+  --muted: #f5f5f5;
+  --muted-foreground: #6b7280;
+  --accent: #e5e5e5;
+  --accent-foreground: #000000;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #d4d4d4;
+  --input: #f5f5f5;
+  --ring: #000000;
+  --chart-1: #000000;
+  --chart-2: #e5e5e5;
+  --chart-3: #f5f5f5;
+  --chart-4: #ffffff;
+  --chart-5: #000000;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #000000;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f5f5;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #d4d4d4;
+  --sidebar-ring: #000000;
+}
+
+.dark {
+  /* Dark theme - Black with beige accents */
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #1a1a1a;
+  --card-foreground: #ffffff;
+  --popover: #1a1a1a;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #2a2a2a;
+  --secondary-foreground: #ffffff;
+  --muted: #2a2a2a;
+  --muted-foreground: #7e7f80;
+  --accent: #ffffff;
+  --accent-foreground: #000000;
+  --destructive: oklch(0.65 0.25 25);
+  --border: #2a2a2a;
+  --input: #1a1a1a;
+  --ring: #ffffff;
+  --chart-1: #ffffff;
+  --chart-2: #e5e5e5;
+  --chart-3: #ffffff;
+  --chart-4: #000000;
+  --chart-5: #ffffff;
+  --sidebar: #000000;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #1a1a1a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #2a2a2a;
+  --sidebar-ring: #ffffff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.jodit_toolbar {
+  color: rgba(26, 25, 25, 0.806);
+}
+
+/* Blog content HTML styling */
+.blog-content {
+  @apply text-base leading-relaxed;
+}
+
+.blog-content h1 {
+  @apply text-4xl font-bold mt-8 mb-4 text-black dark:text-white;
+}
+
+.blog-content h2 {
+  @apply text-3xl font-bold mt-6 mb-3 text-black dark:text-white;
+}
+
+.blog-content h3 {
+  @apply text-2xl font-bold mt-5 mb-3 text-black dark:text-white;
+}
+
+.blog-content h4 {
+  @apply text-xl font-semibold mt-4 mb-2 text-black dark:text-white;
+}
+
+.blog-content h5 {
+  @apply text-lg font-semibold mt-3 mb-2 text-black dark:text-white;
+}
+
+.blog-content h6 {
+  @apply text-base font-semibold mt-2 mb-2 text-black dark:text-white;
+}
+
+.blog-content p {
+  @apply mb-4 text-gray-800 dark:text-gray-200 leading-7;
+}
+
+.blog-content a {
+  @apply text-blue-600 dark:text-blue-400 hover:underline;
+}
+
+.blog-content strong,
+.blog-content b {
+  @apply font-semibold text-black dark:text-white;
+}
+
+.blog-content em,
+.blog-content i {
+  @apply italic;
+}
+
+.blog-content ul {
+  @apply list-disc list-inside mb-4 ml-4 space-y-2 text-gray-800 dark:text-gray-200;
+}
+
+.blog-content ol {
+  @apply list-decimal list-inside mb-4 ml-4 space-y-2 text-gray-800 dark:text-gray-200;
+}
+
+.blog-content li {
+  @apply mb-1 text-gray-800 dark:text-gray-200;
+}
+
+.blog-content blockquote {
+  @apply border-l-4 border-blue-500 dark:border-blue-400 pl-4 italic my-4 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 py-2;
+}
+
+.blog-content code {
+  @apply bg-gray-100 dark:bg-gray-800 text-pink-600 dark:text-pink-400 px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.blog-content pre {
+  @apply bg-gray-100 dark:bg-gray-900 p-4 rounded-lg overflow-x-auto mb-4 text-sm;
+}
+
+.blog-content pre code {
+  @apply bg-transparent text-gray-800 dark:text-gray-200 px-0 py-0;
+}
+
+.blog-content img {
+  @apply rounded-lg shadow-md my-4 max-w-full h-auto;
+}
+
+.blog-content table {
+  @apply w-full border-collapse border border-gray-300 dark:border-gray-700 my-4;
+}
+
+.blog-content th {
+  @apply bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-4 py-2 text-left font-semibold text-black dark:text-white;
+}
+
+.blog-content td {
+  @apply border border-gray-300 dark:border-gray-700 px-4 py-2 text-gray-800 dark:text-gray-200;
+}
+
+.blog-content hr {
+  @apply my-6 border-gray-300 dark:border-gray-700;
+}
+
+.blog-content figure {
+  @apply my-4;
+}
+
+.blog-content figcaption {
+  @apply text-sm text-center text-gray-600 dark:text-gray-400 mt-2;
+}
+
+.blog-content video {
+  @apply rounded-lg my-4 max-w-full h-auto;
+}
+
+.blog-content iframe {
+  @apply rounded-lg my-4 max-w-full;
+}
