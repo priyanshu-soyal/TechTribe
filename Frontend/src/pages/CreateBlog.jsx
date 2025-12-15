@@ -9,7 +9,7 @@ import {
     SelectLabel,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select"
+} from "@/Components/ui/select"
 import React, { useState } from 'react'
 import { Button } from '@/Components/ui/button'
 import { Link, useNavigate } from 'react-router-dom'

@@ -12,8 +12,7 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/Components/ui/dialog"
 import { Button } from "@/Components/ui/button"
 import { Input } from "@/Components/ui/input"
 import { Textarea } from "@/Components/ui/textarea"

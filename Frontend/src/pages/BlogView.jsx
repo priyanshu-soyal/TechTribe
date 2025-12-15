@@ -8,7 +8,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from "@/Components/ui/breadcrumb"
 import { Avatar, AvatarImage, AvatarFallback } from '@/Components/ui/avatar';
 import { Button } from '@/Components/ui/button';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';

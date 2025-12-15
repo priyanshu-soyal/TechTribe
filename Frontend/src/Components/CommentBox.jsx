@@ -18,7 +18,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/Components/ui/dropdown-menu"
 
 function CommentBox({ selectedBlog }) {
     // console.log(blog)
