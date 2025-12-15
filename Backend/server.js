@@ -25,43 +25,15 @@ import commentRoute from "./routes/commentRoute.js";
 import cors from "cors";
 
 // use default middlewares :-
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// ✅ CORS Configuration: Vercel ke preview aur production dono URLs ko allow karta hai
-// Preview URLs format: https://projectname-xxxxx-username.vercel.app
-// Production URL: https://the-techtribe.vercel.app
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests from Vercel deployments (preview + production)
-      const allowedOrigins = [
-        "https://the-techtribe.vercel.app", // Production URL
-        /https:\/\/the-techtribe-.*\.vercel\.app$/, // Preview URLs (regex pattern)
-      ];
-
-      // Allow requests with no origin (like mobile apps or curl)
-      if (!origin) return callback(null, true);
-
-      // Check if origin matches production or preview pattern
-      const isAllowed = allowedOrigins.some((pattern) => {
-        if (pattern instanceof RegExp) {
-          return pattern.test(origin);
-        }
-        return pattern === origin;
-      });
-
-      if (isAllowed) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "https://localhost:8000",
     credentials: true,
   })
 );
-
-app.use(cookieParser());
 
 // routes :-
 app.use("/api/v1/user", userRoute);
