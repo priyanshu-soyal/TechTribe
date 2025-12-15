@@ -38,7 +38,7 @@ function RecentBlog() {
     useEffect(() => {
         const getRecentBlogs = async () => {
             try {
-                const res = await axios.get('http://localhost:8000/api/v1/blog', { withCredentials: true });
+                const res = await axios.get('https://the-techtribe.vercel.app/api/v1/blog', { withCredentials: true });
                 if (res.data.success) {
                     const blogs = res.data.blogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                     dispatch(setBlog(blogs))

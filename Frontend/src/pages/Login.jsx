@@ -48,7 +48,7 @@ function Login() {
 
             dispatch(setLoading(true))
 
-            const res = await axios.post(`http://localhost:8000/api/v1/user/login`, input, {
+            const res = await axios.post(`https://the-techtribe.vercel.app/api/v1/user/login`, input, {
                 headers: {
                     "Content-Type": "application/json"
                 },
