@@ -42,8 +42,8 @@ function Blogs() {
         const fetchBlogs = async () => {
             try {
                 const url = selectedCategory === 'All'
-                    ? 'http://localhost:8000/api/v1/blog'
-                    : `http://localhost:8000/api/v1/blog/category/${encodeURIComponent(selectedCategory)}`
+                    ? 'https://the-techtribe.onrender.com/api/v1/blog'
+                    : `https://the-techtribe.onrender.com/api/v1/blog/category/${encodeURIComponent(selectedCategory)}`
 
                 const res = await axios.get(url, { withCredentials: true })
                 if (res.data.success) {

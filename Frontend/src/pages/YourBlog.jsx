@@ -16,7 +16,7 @@ function YourBlog() {
 
     const getOwnBlog = async () => {
         try {
-            const res = await axios.get(`http://localhost:8000/api/v1/blog/get-own-blogs`, { withCredentials: true });
+            const res = await axios.get(`https://the-techtribe.onrender.com/api/v1/blog/get-own-blogs`, { withCredentials: true });
             if (res.data.success) {
                 dispatch(setBlog(res.data.blogs))
             }
@@ -39,7 +39,7 @@ function YourBlog() {
 
     const deleteBlog = async (id) => {
         try {
-            const res = await axios.delete(`http://localhost:8000/api/v1/blog/delete/${id}`, { withCredentials: true })
+            const res = await axios.delete(`https://the-techtribe.onrender.com/api/v1/blog/delete/${id}`, { withCredentials: true })
             if (res.data.success) {
                 const updatedBlogData = blog.filter((b) => b._id !== id)
                 dispatch(setBlog(updatedBlogData))
