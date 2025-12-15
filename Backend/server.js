@@ -27,12 +27,40 @@ import cors from "cors";
 // use default middlewares :-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// ✅ CORS Configuration: Vercel ke preview aur production dono URLs ko allow karta hai
+// Preview URLs format: https://projectname-xxxxx-username.vercel.app
+// Production URL: https://the-techtribe.vercel.app
 app.use(
   cors({
-    origin: "https://the-techtribe.vercel.app",
+    origin: function (origin, callback) {
+      // Allow requests from Vercel deployments (preview + production)
+      const allowedOrigins = [
+        "https://the-techtribe.vercel.app", // Production URL
+        /https:\/\/the-techtribe-.*\.vercel\.app$/, // Preview URLs (regex pattern)
+      ];
+
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+
+      // Check if origin matches production or preview pattern
+      const isAllowed = allowedOrigins.some((pattern) => {
+        if (pattern instanceof RegExp) {
+          return pattern.test(origin);
+        }
+        return pattern === origin;
+      });
+
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 
 // routes :-
