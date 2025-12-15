@@ -29714,10 +29714,9 @@ function zY() {
     _ = async (x) => {
       x.preventDefault();
       try {
-        const C = await Wt.get(
-          "https://the-techtribe.vercel.app/api/v1/user/logout",
-          { withCredentials: !0 }
-        );
+        const C = await Wt.get("https://localhost:8000/api/v1/user/logout", {
+          withCredentials: !0,
+        });
         C.data.success && (m("/"), f(SS(null)), jn.success(C.data.message));
       } catch (C) {
         console.log(C), jn.error(C);
@@ -30312,10 +30311,9 @@ function DY() {
     M.useEffect(() => {
       (async () => {
         try {
-          const _ = await Wt.get(
-            "https://the-techtribe.vercel.app/api/v1/blog",
-            { withCredentials: !0 }
-          );
+          const _ = await Wt.get("https://localhost:8000/api/v1/blog", {
+            withCredentials: !0,
+          });
           if (_.data.success) {
             const x = _.data.blogs.sort(
               (C, E) => new Date(E.createdAt) - new Date(C.createdAt)
@@ -30556,8 +30554,8 @@ function FY() {
         try {
           const C =
               b === "All"
-                ? "https://the-techtribe.vercel.app/api/v1/blog"
-                : `https://the-techtribe.vercel.app/api/v1/blog/category/${encodeURIComponent(
+                ? "https://localhost:8000/api/v1/blog"
+                : `https://localhost:8000/api/v1/blog/category/${encodeURIComponent(
                     b
                   )}`,
             E = await Wt.get(C, { withCredentials: !0 });
@@ -30770,14 +30768,10 @@ function WY() {
       x.preventDefault(), console.log(m);
       try {
         d(Qh(!0));
-        const C = await Wt.post(
-          "https://the-techtribe.vercel.app/api/v1/user/login",
-          m,
-          {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: !0,
-          }
-        );
+        const C = await Wt.post("https://localhost:8000/api/v1/user/login", m, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: !0,
+        });
         C.data.success &&
           (a("/"), d(SS(C.data.user)), jn.success(C.data.message));
       } catch (C) {
@@ -30893,7 +30887,7 @@ function YY() {
       try {
         f(Qh(!0));
         const C = await Wt.post(
-          "https://the-techtribe.vercel.app/api/v1/user/register",
+          "https://localhost:8000/api/v1/user/register",
           m,
           {
             headers: { "Content-Type": "application/json" },
@@ -32252,7 +32246,7 @@ function aK() {
       try {
         f(Qh(!0));
         const B = await Wt.put(
-          "https://the-techtribe.vercel.app/api/v1/user/profile/update",
+          "https://localhost:8000/api/v1/user/profile/update",
           R,
           {
             headers: { "Content-Type": "multipart/form-data" },
@@ -32624,7 +32618,7 @@ function lK() {
     m = async () => {
       try {
         const _ = await Wt.get(
-          "https://the-techtribe.vercel.app/api/v1/blog/get-own-blogs",
+          "https://localhost:8000/api/v1/blog/get-own-blogs",
           { withCredentials: !0 }
         );
         _.data.success && a(Wc(_.data.blogs));
@@ -32639,7 +32633,7 @@ function lK() {
     y = async (_) => {
       try {
         const x = await Wt.delete(
-          `https://the-techtribe.vercel.app/api/v1/blog/delete/${_}`,
+          `https://localhost:8000/api/v1/blog/delete/${_}`,
           { withCredentials: !0 }
         );
         if (x.data.success) {
@@ -34190,7 +34184,7 @@ function c$() {
       try {
         b(xw(!0));
         const I = await Wt.post(
-          "https://the-techtribe.vercel.app/api/v1/blog",
+          "https://localhost:8000/api/v1/blog",
           { title: a, category: f },
           {
             headers: { "Content-Type": "application/json" },
@@ -92029,14 +92023,10 @@ function b$() {
         J.append("thumbnail", I.thumbnail);
       try {
         f(xw(!0));
-        const X = await Wt.put(
-          `https://the-techtribe.vercel.app/api/v1/blog/${b}`,
-          J,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-            withCredentials: !0,
-          }
-        );
+        const X = await Wt.put(`https://localhost:8000/api/v1/blog/${b}`, J, {
+          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: !0,
+        });
         X.data.success &&
           (jn.success(X.data.message), d("/dashboard/your-blogs"));
       } catch (X) {
@@ -92341,7 +92331,7 @@ function k$({ selectedBlog: a }) {
     B = async () => {
       try {
         const F = await Wt.post(
-          `https://the-techtribe.vercel.app/api/v1/comment/${a._id}/create`,
+          `https://localhost:8000/api/v1/comment/${a._id}/create`,
           { content: y },
           {
             headers: { "Content-Type": "application/json" },
@@ -92368,7 +92358,7 @@ function k$({ selectedBlog: a }) {
       try {
         const J = (
           await Wt.get(
-            `https://the-techtribe.vercel.app/api/v1/comment/${a._id}/comment/all`
+            `https://localhost:8000/api/v1/comment/${a._id}/comment/all`
           )
         ).data.comment;
         d(Wy(J));
@@ -92381,7 +92371,7 @@ function k$({ selectedBlog: a }) {
   const U = async (F) => {
       try {
         const K = await Wt.delete(
-          `https://the-techtribe.vercel.app/api/v1/comment/${F}/delete`,
+          `https://localhost:8000/api/v1/comment/${F}/delete`,
           { withCredentials: !0 }
         );
         if (K.data.success) {
@@ -92395,7 +92385,7 @@ function k$({ selectedBlog: a }) {
     H = async (F) => {
       try {
         const K = await Wt.put(
-          `https://the-techtribe.vercel.app/api/v1/comment/${F}/edit`,
+          `https://localhost:8000/api/v1/comment/${F}/edit`,
           { content: E },
           {
             headers: { "Content-Type": "application/json" },
@@ -92413,7 +92403,7 @@ function k$({ selectedBlog: a }) {
     V = async (F) => {
       try {
         const K = await Wt.put(
-          `https://the-techtribe.vercel.app/api/v1/comment/${F}/like`,
+          `https://localhost:8000/api/v1/comment/${F}/like`,
           {},
           { withCredentials: !0 }
         );
@@ -92629,7 +92619,7 @@ function S$() {
         try {
           const U = C ? "dislike" : "like",
             H = await Wt.get(
-              `https://the-techtribe.vercel.app/api/v1/blog/${y._id}/${U}`,
+              `https://localhost:8000/api/v1/blog/${y._id}/${U}`,
               { withCredentials: !0 }
             );
           if (H.data.success) {
