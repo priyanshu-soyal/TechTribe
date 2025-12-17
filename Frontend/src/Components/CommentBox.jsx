@@ -167,7 +167,7 @@ function CommentBox({ selectedBlog }) {
                             Comments ({comment.length})
                         </h2>
                         {
-                            comment.map((item, index) => (
+                            comment.filter(item => item && item.userId).map((item, index) => (
                                 <div
                                     key={index}
                                     className='bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-lg p-4 hover:shadow-md transition-shadow'
@@ -214,7 +214,7 @@ function CommentBox({ selectedBlog }) {
                                                     className='flex gap-1 items-center cursor-pointer hover:text-red-500 dark:hover:text-red-400 transition-colors'
                                                 >
                                                     {
-                                                        item.likes.includes(user._id) ? <FaHeart fill={"red"} /> : <FaRegHeart className='w-4 h-4' />
+                                                        item.likes?.includes(user?._id) ? <FaHeart fill={"red"} /> : <FaRegHeart className='w-4 h-4' />
 
                                                     }
                                                     <span>{item.numberOfLikes || 0}</span>
@@ -225,7 +225,7 @@ function CommentBox({ selectedBlog }) {
                                             </div>
                                         </div>
                                         {
-                                            user._id === item?.userId._id ? (
+                                            user?._id === item?.userId?._id ? (
                                                 <DropdownMenu>
                                                     <DropdownMenuTrigger><BsThreeDots /></DropdownMenuTrigger>
                                                     <DropdownMenuContent >

@@ -89,7 +89,7 @@ function Blogs() {
                 {
                     blog && blog.length > 0 ? (
                         <div className='grid gap-10 grid-cols-1 md:grid-cols-3'>
-                            {blog.map((blog, index) => (
+                            {blog.filter(b => b && b._id).map((blog, index) => (
                                 <BlogCard key={blog._id || index} blog={blog} index={index} />
                             ))}
                         </div>

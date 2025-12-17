@@ -67,7 +67,7 @@ function YourBlog() {
                     </Card>
                 ) : (
                     <div className='grid grid-cols-1 gap-4 md:gap-6'>
-                        {blog.map((item) => (
+                        {blog.filter(item => item && item._id).map((item) => (
                             <Card key={item._id} className='p-4 md:p-6 hover:shadow-lg transition-shadow dark:bg-[#1a1a1a] dark:border-[#2a2a2a]'>
                                 <div className='flex flex-col sm:flex-row gap-4'>
                                     {/* Thumbnail */}

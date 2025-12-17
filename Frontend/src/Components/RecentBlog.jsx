@@ -62,7 +62,7 @@ function RecentBlog() {
                 <div>
                     <div className='mt-10'>
                         {
-                            blog?.slice(0, 4).map((blog, index) => {
+                            blog?.filter(b => b && b._id).slice(0, 4).map((blog, index) => {
                                 return <BlogCardList key={index} blog={blog} />
                             })
                         }
