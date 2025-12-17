@@ -115,7 +115,8 @@ export const login = async (req, res) => {
       .cookie("token", token, {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "strict", //idea: not to send the cookie on cross‑site requests.
+        sameSite: "none",
+        secure: true,
       })
       .json({
         success: true,
@@ -133,7 +134,12 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    return res.status(200).cookie("token", "", { maxAge: 0 }).json({
+    return res.status(200).cookie("token", "", { 
+      maxAge: 0,
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    }).json({
       success: true,
       message: "Logout successfully",
     });
