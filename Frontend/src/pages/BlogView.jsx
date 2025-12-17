@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom'
 import {
@@ -87,9 +87,9 @@ function BlogView() {
         }
     }
 
-    // useEffect(() => {
-    //     window.scrollTo(0, 0)
-    // }, [selectedBlog])
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [selectedBlog])
 
     if (!selectedBlog) {
         return (
