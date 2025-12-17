@@ -19,11 +19,13 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu"
+import { useNavigate } from 'react-router-dom'
 
 function CommentBox({ selectedBlog }) {
     // console.log(blog)
 
     const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const { user } = useSelector(store => store.auth)
     const { blog } = useSelector(store => store.blog)
@@ -124,6 +126,9 @@ function CommentBox({ selectedBlog }) {
     }
 
     const likeCommentHandler = async (commentId) => {
+        if (!user) {
+            navigate("/login")
+        }
         try {
             const res = await axios.put(`https://the-techtribe.onrender.com/api/v1/comment/${commentId}/like`, {}, { withCredentials: true })
             if (res.data.success) {
@@ -142,24 +147,31 @@ function CommentBox({ selectedBlog }) {
 
     return (
         <div className='w-full'>
-            <div className='flex items-center gap-4 mb-4'>
-                <Avatar>
-                    <AvatarImage src={user?.profilePicture} />
-                    <AvatarFallback>{user?.username?.charAt(0).toUpperCase()}</AvatarFallback>
-                </Avatar>
-                <h3 className='font-semibold text-black dark:text-white'>{user?.username}</h3>
-            </div>
-            <div className='flex gap-3 items-start mb-6'>
-                <Textarea
-                    placeholder='Leave a comment'
-                    className='bg-white dark:bg-[#1a1a1a] border-gray-300 dark:border-[#2a2a2a] flex-1 min-h-20 resize-none'
-                    value={content}
-                    onChange={changeEventHandler}
-                />
-                <Button onClick={commentHandler} className='mt-1' disabled={!content.trim()}>
-                    <LucideSend className='w-4 h-4' />
-                </Button>
-            </div>
+            {
+                user ? (
+                    <>
+                        <div className='flex items-center gap-4 mb-4'>
+                            <Avatar>
+                                <AvatarImage src={user?.profilePicture} />
+                                <AvatarFallback>{user?.username?.charAt(0).toUpperCase()}</AvatarFallback>
+                            </Avatar>
+                            <h3 className='font-semibold text-black dark:text-white'>{user?.username}</h3>
+                        </div>
+                        <div className='flex gap-3 items-start mb-6'>
+                            <Textarea
+                                placeholder='Leave a comment'
+                                className='bg-white dark:bg-[#1a1a1a] border-gray-300 dark:border-[#2a2a2a] flex-1 min-h-20 resize-none'
+                                value={content}
+                                onChange={changeEventHandler}
+                            />
+                            <Button onClick={commentHandler} className='mt-1' disabled={!content.trim()}>
+                                <LucideSend className='w-4 h-4' />
+                            </Button>
+                        </div>
+                    </>
+                ) : (null)
+            }
+
             {
                 comment.length > 0 ? (
                     <div className='space-y-4'>

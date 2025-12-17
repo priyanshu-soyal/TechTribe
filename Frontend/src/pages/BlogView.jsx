@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -22,6 +22,7 @@ import CommentBox from '@/Components/CommentBox';
 function BlogView() {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const params = useParams()
 
     const blogId = params.blogId
@@ -65,6 +66,10 @@ function BlogView() {
 
     const likeToggler = async () => {
         if (!selectedBlog) return
+
+        if (!user) {
+            navigate("/login")
+        }
 
         try {
             const action = liked ? 'dislike' : 'like'
