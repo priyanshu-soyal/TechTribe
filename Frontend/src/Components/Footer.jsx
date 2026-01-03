@@ -12,8 +12,8 @@ function Footer() {
                 <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
                     {/* Brand Section */}
                     <div className='col-span-1 md:col-span-2'>
-                        {/* <h2 className='text-3xl font-bold mb-4'>TechTribe</h2> */}
-                        <h2 className='text-3xl font-bold mb-4'>InnoInk</h2>
+                         <h2 className='text-3xl font-bold mb-4'>TechTribe</h2>
+                        {/* <h2 className='text-3xl font-bold mb-4'>InnoInk</h2> */}
                         <p className='text-gray-300 mb-4'>
                             Your go-to platform for the latest insights in technology, development, and innovation.
                             Share your knowledge and connect with fellow tech enthusiasts.
