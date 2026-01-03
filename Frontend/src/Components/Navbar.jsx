@@ -56,7 +56,8 @@ function Navbar() {
                         <Link to='/'>
                             <div className='flex gap-2 items-center'>
                                 <img src="https://images.unsplash.com/vector-1739891193811-715e6efae0d5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTY0fHxsb2dvfGVufDB8fDB8fHww" alt="logo" className='rounded-full w-7 h-7 md:w-10 md:h-10 dark:invert' />
-                                <h1 className='font-bold text-xl sm:text-2xl md:text-4xl'>TechTribe</h1>
+                                {/* <h1 className='font-bold text-xl sm:text-2xl md:text-4xl'>TechTribe</h1> */}
+                                <h1 className='font-bold text-xl sm:text-2xl md:text-4xl'>InnoInk</h1>
                             </div>
                         </Link>
                         {/* <div className='relative hidden md:block'>
