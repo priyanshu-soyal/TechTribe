@@ -10,11 +10,14 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
+      unique: true,
+      index: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
+      index: true, // Indexing se database ko pata hota hai ki data kahan hai.
     },
     password: {
       type: String,

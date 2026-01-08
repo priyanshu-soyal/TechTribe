@@ -20,8 +20,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import { toast } from "sonner"
 import { setLoading, setUser } from "@/Redux/authSlice"
-import axios from "axios"
 import { Loader2 } from "lucide-react"
+import api from "@/Config/axios"
 
 
 function Profile() {
@@ -73,11 +73,10 @@ function Profile() {
 
         try {
             dispatch(setLoading(true))
-            const res = await axios.put(`https://the-techtribe.onrender.com/api/v1/user/profile/update`, formData, {
+            const res = await api.put(`/api/v1/user/profile/update`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
-                },
-                withCredentials: true
+                }
             })
             if (res.data.success) {
                 toast.success(res.data.message)
@@ -86,7 +85,7 @@ function Profile() {
             }
         } catch (error) {
             console.log(error);
-            toast.error(error.response.data.message)
+            toast.error(error.response?.data?.message || 'Profile update failed')
         } finally {
             dispatch(setLoading(false))
         }

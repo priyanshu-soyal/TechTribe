@@ -40,36 +40,49 @@ export const register = async (req, res) => {
       });
     }
 
-    const existingUserByEmail = await User.findOne({ email: email });
-    if (existingUserByEmail) {
-      return res.status(400).json({
-        success: false,
-        message: "Email already exists",
-      });
-    }
+    const existingUser = await User.findOne({
+      $or: [{ email: email }, { username: username }],
+    });
 
-    const existingUserByUsername = await User.findOne({ username: username });
-    if (existingUserByUsername) {
+    if (existingUser) {
       return res.status(400).json({
         success: false,
-        message: "Username already exists",
+        message: "Email or Username already exists",
       });
     }
 
     // hashing for password using bcrypt.js
     const hashPassword = await bcrypt.hash(password, 10);
 
-    await User.create({
+    const newUser = await User.create({
       name,
       username,
       email,
       password: hashPassword,
     });
 
-    return res.status(201).json({
-      success: true,
-      message: "Account created successfully",
+    const token = jwt.sign({ userId: newUser._id }, process.env.SECRET_KEY, {
+      expiresIn: "7d",
     });
+
+    return res
+      .status(201)
+      .cookie("token", token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      })
+      .json({
+        success: true,
+        message: "Account created and logged in successfully",
+        user: {
+          _id: newUser._id,
+          name: newUser.name,
+          username: newUser.username,
+          email: newUser.email,
+        },
+      });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -90,7 +103,7 @@ export const login = async (req, res) => {
       });
     }
 
-    let user = await User.findOne({ email: email });
+    let user = await User.findOne({ email: email }).lean(); //.lean() :- Ye query ko 3-4 guna fast bana deta hai kyunki ye simple JavaScript object deta hai.
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -134,15 +147,18 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    return res.status(200).cookie("token", "", { 
-      maxAge: 0,
-      httpOnly: true,
-      sameSite: "none",
-      secure: true,
-    }).json({
-      success: true,
-      message: "Logout successfully",
-    });
+    return res
+      .status(200)
+      .cookie("token", "", {
+        maxAge: 0,
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      })
+      .json({
+        success: true,
+        message: "Logout successfully",
+      });
   } catch (error) {
     console.log(error);
   }

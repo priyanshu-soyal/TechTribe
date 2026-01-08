@@ -1,11 +1,11 @@
 import { setBlog } from '@/Redux/blogSlice'
-import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import BlogCardList from './BlogCardList'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button } from './ui/button'
+import api from '@/Config/axios'
 
 function RecentBlog() {
 
@@ -38,7 +38,7 @@ function RecentBlog() {
     useEffect(() => {
         const getRecentBlogs = async () => {
             try {
-                const res = await axios.get('https://the-techtribe.onrender.com/api/v1/blog', { withCredentials: true });
+                const res = await api.get('/api/v1/blog');
                 if (res.data.success) {
                     const blogs = res.data.blogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                     dispatch(setBlog(blogs))

@@ -1,12 +1,12 @@
 import { Card } from '@/Components/ui/card'
 import { Button } from '@/Components/ui/button'
 import { setBlog } from '@/Redux/blogSlice'
-import axios from 'axios'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import { Edit, Trash2, Calendar, Tag } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import api from '@/Config/axios'
 
 function YourBlog() {
 
@@ -16,13 +16,13 @@ function YourBlog() {
 
     const getOwnBlog = async () => {
         try {
-            const res = await axios.get(`https://the-techtribe.onrender.com/api/v1/blog/get-own-blogs`, { withCredentials: true });
+            const res = await api.get(`/api/v1/blog/get-own-blogs`);
             if (res.data.success) {
                 dispatch(setBlog(res.data.blogs))
             }
         } catch (error) {
             console.log(error)
-            toast.error(error.response.data.error)
+            toast.error(error.response?.data?.message || 'Failed to fetch blogs')
         }
     }
 
@@ -39,7 +39,7 @@ function YourBlog() {
 
     const deleteBlog = async (id) => {
         try {
-            const res = await axios.delete(`https://the-techtribe.onrender.com/api/v1/blog/delete/${id}`, { withCredentials: true })
+            const res = await api.delete(`/api/v1/blog/delete/${id}`)
             if (res.data.success) {
                 const updatedBlogData = blog.filter((b) => b._id !== id)
                 dispatch(setBlog(updatedBlogData))
@@ -47,7 +47,7 @@ function YourBlog() {
             }
         } catch (error) {
             console.log(error)
-            toast.error(error.response.data.message)
+            toast.error(error.response?.data?.message || 'Failed to delete blog')
         }
     }
 

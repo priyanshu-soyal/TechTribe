@@ -14,9 +14,9 @@ import { Button } from '@/Components/ui/button';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { Bookmark, MessageSquare, Share2 } from 'lucide-react';
 import { toast } from 'sonner';
-import axios from 'axios';
 import { setBlog } from '@/Redux/blogSlice';
 import CommentBox from '@/Components/CommentBox';
+import api from '@/Config/axios';
 
 
 function BlogView() {
@@ -73,7 +73,7 @@ function BlogView() {
 
         try {
             const action = liked ? 'dislike' : 'like'
-            const res = await axios.get(`https://the-techtribe.onrender.com/api/v1/blog/${selectedBlog._id}/${action}`, { withCredentials: true })
+            const res = await api.get(`/api/v1/blog/${selectedBlog._id}/${action}`)
             if (res.data.success) {
                 const updatedLikes = liked ? blogLike - 1 : blogLike + 1
                 setBlogLike(updatedLikes)
@@ -177,7 +177,7 @@ function BlogView() {
                         <Button variant="outline" className="hover:bg-transparent hover:text-current text-sm sm:text-base">
                             <MessageSquare className='h-4 w-4' />
                             <span className="hidden sm:inline">{selectedBlog.comments.length} Comment</span>
-                            <span className="sm:hidden">1</span>
+                            <span className="sm:hidden">{selectedBlog.comments.length}</span>
                         </Button>
                     </div>
                     <div className='flex items-center gap-2'>

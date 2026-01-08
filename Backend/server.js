@@ -4,11 +4,15 @@ const app = express();
 
 // import dotenv :-
 import dotenv from "dotenv";
-dotenv.config();
-
 // import path :-
 import path from "path";
-const __dirname = path.resolve();
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Configure dotenv to read from parent directory (TechTribe folder)
+dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
 
 // import cookie-parser
 import cookieParser from "cookie-parser";
@@ -47,7 +51,7 @@ app.get(/.*/, (req, res) => {
 });
 
 // listen server :-
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   connectDB();
   console.log(`Server Listen at  http://localhost:${PORT}/`);

@@ -8,8 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleTheme } from '../Redux/themeSlice'
 import { toast } from 'sonner'
-import axios from 'axios'
 import { setUser } from '../Redux/authSlice'
+import api from '@/Config/axios'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -34,7 +34,7 @@ function Navbar() {
     const logoutHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.get(`https://the-techtribe.onrender.com/api/v1/user/logout`, { withCredentials: true })
+            const res = await api.get('/api/v1/user/logout')
             if (res.data.success) {
                 navigate("/")
                 dispatch(setUser(null))
@@ -49,7 +49,7 @@ function Navbar() {
 
     return (
         <>
-            <div className='py-2 fixed w-full dark:bg-black bg-white dark:border-b-[#2a2a2a] border-b-gray-300 shadow-md z-50'>
+            <div className='py-2 fixed w-full dark:bg-black bg-white dark:border-b-[#2a2a2a] border-b-gray-300 shadow-md z-50 border-b-2 border-gray-300'>
                 <div className='max-w-7xl mx-auto flex justify-between items-center px-4 md:px-0'>
                     {/* Logo Section */}
                     <div className='flex gap-2 md:gap-7 items-center'>

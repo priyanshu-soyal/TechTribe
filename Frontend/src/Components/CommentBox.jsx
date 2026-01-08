@@ -6,8 +6,8 @@ import { Button } from './ui/button'
 import { Edit, LucideSend, Trash2 } from 'lucide-react'
 import { BsThreeDots } from "react-icons/bs";
 import { toast } from 'sonner'
-import axios from 'axios'
 import { setComment } from '@/Redux/CommentSlice'
+import api from '@/Config/axios'
 import { FaRegHeart, FaHeart } from 'react-icons/fa'
 import { setBlog } from '@/Redux/blogSlice'
 
@@ -41,11 +41,10 @@ function CommentBox({ selectedBlog }) {
 
     const commentHandler = async () => {
         try {
-            const res = await axios.post(`https://the-techtribe.onrender.com/api/v1/comment/${selectedBlog._id}/create`, { content }, {
+            const res = await api.post(`/api/v1/comment/${selectedBlog._id}/create`, { content }, {
                 headers: {
                     "Content-Type": "application/json"
-                },
-                withCredentials: true
+                }
             })
             if (res.data.success) {
                 let updatedComment;
@@ -76,7 +75,7 @@ function CommentBox({ selectedBlog }) {
     useEffect(() => {
         const getAllCommentOfBlog = async () => {
             try {
-                const res = await axios.get(`https://the-techtribe.onrender.com/api/v1/comment/${selectedBlog._id}/comment/all`)
+                const res = await api.get(`/api/v1/comment/${selectedBlog._id}/comment/all`)
                 const data = res.data.comment
                 dispatch(setComment(data))
             } catch (error) {
@@ -89,7 +88,7 @@ function CommentBox({ selectedBlog }) {
 
     const deleteComment = async (commentId) => {
         try {
-            const res = await axios.delete(`https://the-techtribe.onrender.com/api/v1/comment/${commentId}/delete`, { withCredentials: true })
+            const res = await api.delete(`/api/v1/comment/${commentId}/delete`)
             if (res.data.success) {
                 const updatedComment = comment.filter((item) => item._id !== commentId)
                 dispatch(setComment(updatedComment))
@@ -103,13 +102,12 @@ function CommentBox({ selectedBlog }) {
 
     const editCommentHandler = async (commentId) => {
         try {
-            const res = await axios.put(`https://the-techtribe.onrender.com/api/v1/comment/${commentId}/edit`,
+            const res = await api.put(`/api/v1/comment/${commentId}/edit`,
                 { content: editContent },
                 {
                     headers: {
                         "Content-Type": "application/json"
-                    },
-                    withCredentials: true
+                    }
                 }
             )
             if (res.data.success) {
@@ -130,7 +128,7 @@ function CommentBox({ selectedBlog }) {
             navigate("/login")
         }
         try {
-            const res = await axios.put(`https://the-techtribe.onrender.com/api/v1/comment/${commentId}/like`, {}, { withCredentials: true })
+            const res = await api.put(`/api/v1/comment/${commentId}/like`, {})
             if (res.data.success) {
                 const updatedComment = res.data.updatedComment;
                 const updatedCommentList = comment.map(item =>

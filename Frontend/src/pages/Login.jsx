@@ -11,10 +11,10 @@ import { Button } from "../Components/ui/button";
 
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setUser } from "../Redux/authSlice";
 import { Loader2 } from "lucide-react";
+import api from "@/Config/axios";
 
 function Login() {
     // useNavigate from react router to navigate b/w route
@@ -48,11 +48,10 @@ function Login() {
 
             dispatch(setLoading(true))
 
-            const res = await axios.post(`https://the-techtribe.onrender.com/api/v1/user/login`, input, {
+            const res = await api.post(`/api/v1/user/login`, input, {
                 headers: {
                     "Content-Type": "application/json"
-                },
-                withCredentials: true
+                }
             })
 
             if (res.data.success) {
@@ -63,7 +62,7 @@ function Login() {
 
         } catch (error) {
             console.log(error)
-            toast.error(error.response.data.message)
+            toast.error(error.response?.data?.message || 'Login failed')
         } finally {
             dispatch(setLoading(false))
         }

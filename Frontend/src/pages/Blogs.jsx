@@ -1,11 +1,11 @@
 import BlogCard from '@/Components/BlogCard'
 import { setBlog } from '@/Redux/blogSlice'
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import { Button } from '@/Components/ui/button'
+import api from '@/Config/axios'
 
 function Blogs() {
 
@@ -42,10 +42,10 @@ function Blogs() {
         const fetchBlogs = async () => {
             try {
                 const url = selectedCategory === 'All'
-                    ? 'https://the-techtribe.onrender.com/api/v1/blog'
-                    : `https://the-techtribe.onrender.com/api/v1/blog/category/${encodeURIComponent(selectedCategory)}`
+                    ? '/api/v1/blog'
+                    : `/api/v1/blog/category/${encodeURIComponent(selectedCategory)}`
 
-                const res = await axios.get(url, { withCredentials: true })
+                const res = await api.get(url)
                 if (res.data.success) {
                     dispatch(setBlog(res.data.blogs))
                 }
@@ -61,7 +61,7 @@ function Blogs() {
     }, [selectedCategory, dispatch])
 
     return (
-        <div className='pt-15 bg-white dark:bg-black min-h-screen'>
+        <div className='pt-16 bg-white dark:bg-black min-h-screen'>
             <div className='max-w-6xl mx-auto text-center flex flex-col space-y-4 items-center'>
                 <h1 className='text-4xl font-bold pt-10 text-black dark:text-white'>Our Blogs</h1>
                 <hr className='w-24 text-center border-2 border-black dark:border-white rounded-full' />

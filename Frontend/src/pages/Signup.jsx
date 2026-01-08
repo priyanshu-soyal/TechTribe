@@ -10,10 +10,10 @@ import { Input } from "../Components/ui/input";
 import { Button } from "../Components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../Redux/authSlice";
+import { setLoading, setUser } from "../Redux/authSlice";
 import { Loader2 } from "lucide-react";
+import api from "@/Config/axios";
 
 function Signup() {
 
@@ -23,7 +23,7 @@ function Signup() {
 
     const dispatch = useDispatch()
 
-    const [user, setUser] = useState({
+    const [users, setUsers] = useState({
         name: "",
         username: "",
         email: "",
@@ -32,7 +32,7 @@ function Signup() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUser((prev) => ({
+        setUsers((prev) => ({
             ...prev,
             // [name] :- for dynamic(d/f-d/f) name in d/f-d/f input field  
             [name]: value,
@@ -47,19 +47,19 @@ function Signup() {
 
             dispatch(setLoading(true))
 
-            const res = await axios.post(`https://the-techtribe.onrender.com/api/v1/user/register`, user, {
+            const res = await api.post(`/api/v1/user/register`, users, {
                 headers: {
                     "Content-Type": "application/json"
-                },
-                withCredentials: true
+                }
             })
             if (res.data.success) {
-                navigate('/login');
+                dispatch(setUser(res.data.user));
+                navigate('/');
                 toast.success(res.data.message);
             }
         } catch (error) {
             console.log(error);
-            toast.error(error.response.data.message)
+            toast.error(error.response?.data?.message || 'Signup failed')
         } finally {
             dispatch(setLoading(false))
         }
@@ -89,7 +89,7 @@ function Signup() {
                                     name="name"
                                     id="name"
                                     className="border-gray-300 dark:border-[#2a2a2a] dark:bg-[#1a1a1a]"
-                                    value={user.name}
+                                    value={users.name}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -101,7 +101,7 @@ function Signup() {
                                     name="username"
                                     id="username"
                                     className="border-gray-300 dark:border-[#2a2a2a] dark:bg-[#1a1a1a]"
-                                    value={user.username}
+                                    value={users.username}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -113,7 +113,7 @@ function Signup() {
                                     name="email"
                                     id="email"
                                     className="border-gray-300 dark:border-[#2a2a2a] dark:bg-[#1a1a1a]"
-                                    value={user.email}
+                                    value={users.email}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -125,7 +125,7 @@ function Signup() {
                                     name="password"
                                     id="password"
                                     className="border-gray-300 dark:border-[#2a2a2a] dark:bg-[#1a1a1a]"
-                                    value={user.password}
+                                    value={users.password}
                                     onChange={handleChange}
                                 />
                             </div>

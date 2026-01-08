@@ -15,10 +15,10 @@ import {
 } from "@/Components/ui/select"
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
 import { toast } from 'sonner'
 import { setLoading, } from '@/Redux/blogSlice'
 import { Loader2 } from 'lucide-react'
+import api from '@/Config/axios'
 
 function UpdateBlog() {
 
@@ -75,11 +75,10 @@ function UpdateBlog() {
         try {
             dispatch(setLoading(true))
 
-            const res = await axios.put(`https://the-techtribe.onrender.com/api/v1/blog/${id}`, formData, {
+            const res = await api.put(`/api/v1/blog/${id}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
-                },
-                withCredentials: true
+                }
             })
             if (res.data.success) {
                 toast.success(res.data.message)
@@ -88,7 +87,7 @@ function UpdateBlog() {
 
         } catch (error) {
             console.log(error)
-            toast.error(error.response.data.error)
+            toast.error(error.response?.data?.message || 'Failed to update blog')
         } finally {
             dispatch(setLoading(false))
         }
