@@ -6,13 +6,13 @@ function About() {
             <div className="max-w-6xl mx-auto px-4 py-10">
                 {/* Page Title */}
                 <h1 className="text-4xl md:text-5xl font-bold text-center mb-6 text-black dark:text-white">
-                    About TechTribe
+                    About InnoInk
                 </h1>
 
                 {/* Intro Section */}
                 <div className="mt-8 space-y-6 text-lg text-gray-700 dark:text-gray-300">
                     <p>
-                        Welcome to <span className="font-semibold">TechTribe</span>, your
+                        Welcome to <span className="font-semibold">InnoInk</span>, your
                         premier destination for cutting-edge technology insights, tutorials,
                         and industry news.
                     </p>
@@ -27,7 +27,7 @@ function About() {
                         <span className="font-semibold">Web Development</span>,{" "}
                         <span className="font-semibold">AI/ML</span>,{" "}
                         <span className="font-semibold">Cloud Computing</span>, or any other
-                        tech domain, TechTribe is here to help you stay informed and
+                        tech domain, InnoInk is here to help you stay informed and
                         inspired.
                     </p>
                 </div>
@@ -38,7 +38,7 @@ function About() {
                         Our Mission
                     </h2>
                     <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
-                        At TechTribe, we believe in building a community where technology
+                        At InnoInk, we believe in building a community where technology
                         empowers creativity, collaboration, and innovation. Our mission is
                         to make complex topics accessible, inspire curiosity, and help
                         individuals grow in their tech journey.

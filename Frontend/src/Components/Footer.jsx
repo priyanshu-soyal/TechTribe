@@ -12,8 +12,7 @@ function Footer() {
                 <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
                     {/* Brand Section */}
                     <div className='col-span-1 md:col-span-2'>
-                         <h2 className='text-3xl font-bold mb-4'>TechTribe</h2>
-                        {/* <h2 className='text-3xl font-bold mb-4'>InnoInk</h2> */}
+                         <h2 className='text-3xl font-bold mb-4'>InnoInk</h2>
                         <p className='text-gray-300 mb-4'>
                             Your go-to platform for the latest insights in technology, development, and innovation.
                             Share your knowledge and connect with fellow tech enthusiasts.
@@ -63,8 +62,8 @@ function Footer() {
                         <ul className='space-y-2'>
                             <li className='flex items-center space-x-2'>
                                 <MdEmail />
-                                <a href='mailto:info@techtribe.com' className='hover:text-gray-400 transition-colors'>
-                                    info@techtribe.com
+                                <a href='mailto:info@innoink.com' className='hover:text-gray-400 transition-colors'>
+                                    info@innoink.com
                                 </a>
                             </li>
                             <li>
@@ -83,7 +82,7 @@ function Footer() {
                 {/* Bottom Bar */}
                 <div className='border-t border-[#2a2a2a] mt-8 pt-8 text-center'>
                     <p className='text-gray-300'>
-                        &copy; {currentYear} TechTribe. All rights reserved. Built with ❤️ for developers.
+                        &copy; {currentYear} InnoInk. All rights reserved. Built with ❤️ for developers.
                     </p>
                 </div>
             </div>
